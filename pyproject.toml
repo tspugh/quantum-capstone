@@ -1,0 +1,10 @@
+[project]
+name = "quantum-capstone"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jupyterlab>=4.6.3",
+    "qiskit[visualization]>=2.5.2",
+]
