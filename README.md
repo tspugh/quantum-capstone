@@ -2,7 +2,15 @@
 
 This repository is an educational project that implements a Poisson reward function using Qiskit.
 
-This project is built primarily using Jupyter notebooks.
+This project is built primarily using Jupyter notebooks and uv
+
+## Getting started
+
+To initialize, run the commands below:
+```
+uv sync --locked
+uv run jupyter lab
+```
 
 ## Project Goal
 
