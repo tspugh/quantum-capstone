@@ -4,7 +4,7 @@
 
 This course provides the learning path for this repository. It combines probability, classical simulation, quantum circuits, and quantum algorithms in a sequence of reproducible notebooks and small programs.
 
-The central project is a comparison of exact calculation, classical Monte Carlo, quantum probability encoding, and amplitude-estimation methods for a Poisson reward. Probability topics are introduced where they support the implementation, analysis, or validation of that project.
+Unit 0 compares exact calculation, classical Monte Carlo, quantum probability encoding, and measured expectation values for a Poisson reward. Amplitude estimation is a possible later extension. Probability topics are introduced where they support the implementation, analysis, or validation of the project.
 
 ## Learning outcomes
 
@@ -38,7 +38,7 @@ The project estimates $\mathbb{E}[R]$ in several ways:
 1. derive the distribution and expectation exactly;
 2. estimate the expectation with classical Monte Carlo;
 3. encode the reward distribution in a quantum state and estimate it from shots; and
-4. apply a small amplitude-estimation example after the baseline circuit is verified.
+4. optionally apply a small amplitude-estimation example after the baseline circuit is verified.
 
 For a finite quantum register, the reward distribution can be represented directly as
 
@@ -62,25 +62,31 @@ $$
 
 This identity is the main bridge between the probability model and the quantum algorithm.
 
-## Course sequence
+## Unit 0 — Poisson sampling and expectation encoding
 
-| Lesson | Duration | Topic | Repository outcome |
-|---:|---:|---|---|
-| 1 | 30–60 min | Qiskit setup and a first circuit | A locally simulated Bell circuit with measured counts |
-| 2 | 60 min | Discrete laws and the Poisson reward | An exact PMF, normalization check, and calculation of $\mathbb{E}[R]$ |
-| 3 | 60–90 min | Classical Monte Carlo | A seeded simulation that reports estimate, error, and convergence data |
-| 4 | 60 min | Qubits, measurement, and rotations | A biased-coin circuit using $R_y$ and comparison with a Bernoulli model |
-| 5 | 60–90 min | Multi-qubit states and finite encodings | A verified amplitude encoding of $(q_0,\ldots,q_4)$ |
-| 6 | 90 min | Reward encoding | A controlled-rotation circuit satisfying $\Pr(1)=\mathbb{E}[R]/4$ |
-| 7 | 60–90 min | Joint laws and validation | Marginal and conditional checks derived from simulated circuit results |
-| 8 | 60–90 min | Integrated baseline | Exact, Monte Carlo, and quantum-shot estimates exposed through one workflow |
-| 9 | 60 min | Sampling error and resource budgets | A comparison of repetitions, shots, RMSE, and circuit cost |
-| 10 | 60–90 min | Grover search and amplitude amplification | A small search circuit and a derivation of its success probability |
-| 11 | 90 min | Amplitude estimation | A minimal amplitude-estimation reproduction on a known one-qubit problem |
-| 12 | 90 min | Capstone integration | Amplitude estimation applied to the Poisson reward circuit, where practical |
-| 13 | 60 min | Reproducibility and final report | A clean run, saved results, documented assumptions, and a concise comparison |
+Core durations estimate focused work; documentation reading and exploration can extend a session. Lesson 02 took approximately three hours including its interactive extension. Lessons are published as they are used. The revised Lesson 03 combines single-qubit and conditional two-qubit preparation in one notebook with two resumable checkpoints; it does not compress both into a one-hour promise.
 
-Lessons may be split when an implementation needs more time, but each lesson should retain one testable objective.
+| Lesson | Core duration | Topic | Repository outcome |
+|---|---:|---|---|
+| [1](<QIS - Lesson 01 - Workspace and First Quantum Circuit.md>) | 30 min | Workspace and first circuit | Bell circuit, measurement interpretation, and modeled noise |
+| [2](<QIS - Lesson 02 - Poisson Law and Recorded Counts.md>) | 75 min planned; about 3 hr with exploration | Poisson law and recorded counts | Derivation, SciPy verification, NumPy samples, reusable functions, mean markers, and optional interactive controls |
+| [3](<QIS - Lesson 03 - Qubits, Rotations, and a Biased Coin.md>) | 105 min (A: 60, B: 45); allow 3–4 hr | Biased coin, then conditional coins | One-qubit rotation and four-outcome preparation from marginal/conditional rotations; exact and sampled checks |
+| Former 4 slot | Optional, 0–30 min | Consolidation only | Finish or independently modify Part B; no duplicate required lesson |
+| 5 | 90 min | Poisson sampling and expectation encoding | Verified count distribution and controlled reward flag with $\Pr(1)=\mathbb{E}[R]/4$ |
+
+Lesson 05 has two checkpoints and may take more than one sitting. Its three-qubit count register represents 0 through 6 and an explicit overflow category for $N\ge7$. The probabilities are $P(N=k)$ for $0\le k\le6$ and $P(N\ge7)$ for the last category. Counts 1–4 contribute their values to the reward; all other categories contribute zero. A fourth qubit encodes that scaled expectation. This preserves the reward law without claiming to encode every Poisson count separately.
+
+After Lesson 03 Parts A/B, proceed directly to Lesson 05 unless consolidation is useful. The number is retained for continuity. Allow roughly 5–7 hours for the combined Lesson 03 and Lesson 05, with breaks between their checkpoints as needed.
+
+### IBM course boundary for Lesson 03
+
+In [Quantum mechanics basics](https://quantum.cloud.ibm.com/learning/en/courses/use-a-qc-today/quantum-mechanics-basics), read from **Introduction** through **How measurements work**, inclusive, and complete the Hadamard matrix checks. Stop before **Measurement in different bases**. Part B uses the bit-ordering and controlled-rotation references listed in Lesson 03; it does not require the rest of the IBM lesson. Return to the deferred measurement-basis sections before Hamiltonian measurements.
+
+## Further units
+
+Later lessons are planned iteratively around the completed work. Candidate directions include graph Hamiltonians, energy spectra, and a small digitized annealing experiment. Monte Carlo error analysis, Grover search, and amplitude estimation remain available extensions. Specific research questions and later lesson details will be introduced as their scope is established.
+
+Lesson 02's note connecting moments, Gaussian weights, Hermite polynomials, and harmonic-oscillator eigenfunctions is retained as a possible Hamiltonian-unit exploration, not an additional prerequisite for the Poisson circuit.
 
 ## Probability coverage
 
