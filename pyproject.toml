@@ -1,7 +1,7 @@
 [project]
 name = "quantum-capstone"
 version = "0.1.0"
-description = "Add your description here"
+description = "Learning notebooks connecting probability, Poisson rewards, Monte Carlo, and local Qiskit experiments."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

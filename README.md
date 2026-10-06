@@ -1,45 +1,53 @@
-# Self-Study on Quantum Computing
+# Quantum Computing and Probability — Learning Notebooks
 
-This repository is an educational project that implements a Poisson reward function using Qiskit.
+A self-study project connecting probability with quantum computing through worked derivations, classical sampling, and local Qiskit experiments. I am developing this alongside my mathematics master's studies at the University of L’Aquila.
 
-This project is built primarily using Jupyter notebooks and uv
+**Status:** two completed foundational notebooks. The Poisson reward model is currently implemented classically; quantum state preparation and amplitude estimation are future work. This repository does not demonstrate quantum advantage or a completed capstone.
 
-## Getting started
+## Start here
 
-To initialize, run the commands below:
-```
+| Notebook | Question | Implemented work |
+| --- | --- | --- |
+| [01 — Bell states and noise](projects/00-foundations/00-01-ibm-introduction.ipynb) | How do finite-shot variation and modeled device noise differ? | Bell-state circuit, ideal sampling, and a simulated device noise model. |
+| [02 — Poisson rewards](projects/00-foundations/00-02-poisson-distribution.ipynb) | How does transforming a count change its distribution and expectation? | Exact reward law, Monte Carlo comparison, and interactive plots. |
+
+For the second notebook, the example is $N \sim \mathrm{Poi}(2)$ and $R=N\mathbf{1}_{\{N\leq4\}}$. The exact expectation is $\mathbb{E}[R]=\frac{38}{3}e^{-2}\approx1.714247$. Counts above four contribute to the probability of **zero reward**; this is not a conditional, renormalized Poisson distribution.
+
+## Run locally
+
+Requires [uv](https://docs.astral.sh/uv/) and Python 3.12 (recorded in `.python-version`). From a fresh clone:
+
+```bash
+git clone https://github.com/tspugh/quantum-capstone.git
+cd quantum-capstone
 uv sync --locked
 uv run jupyter lab
 ```
 
-## Project Goal
+Open the notebooks in the order above and select the project Python kernel. Both run entirely on a local CPU simulator; no IBM account, API key, or hardware job is needed. GitHub shows saved static outputs; use JupyterLab for the interactive controls.
 
-My goal is to produce a thorough comparison of exact, classical, and quantum computations of a Poisson distribution. This work is based on my mathematics master's program, pairing an Introductory Probability Course's curriculum with publicly available Qiskit resources.
+To execute the published notebooks from clean kernels without changing the committed copies:
 
-By the end, I should thoroughly understand the Poisson distribution, Monte Carlo, quantum models for probability, and amplitude estimation from both a mathematical and quantum computational perspective.
+```bash
+mkdir -p /tmp/quantum-capstone-executed
+uv run jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=180 \
+  --output-dir=/tmp/quantum-capstone-executed \
+  projects/00-foundations/00-01-ibm-introduction.ipynb \
+  projects/00-foundations/00-02-poisson-distribution.ipynb
+```
 
-## Philosophy
+Recorded simulator and NumPy seeds make the examples repeatable in the locked environment. Results may differ across library versions and simulator methods. The fake-device model illustrates modeled noise; it is not a current hardware benchmark.
 
-This repository contains my self-study notebooks on quantum computing. I am using IBM's courses such as [Use A Quantum Computer Today](https://quantum.cloud.ibm.com/learning/en/courses/use-a-qc-today) and the official [Qiskit YouTube Channel](https://www.youtube.com/@qiskit) for guidance.
+## Learning approach and roadmap
 
-Some notebooks are copied from IBM's course. These will be explicitly noted at the top. of the file. I will be re-typing them.
+The notebooks retain predictions, questions, hand derivations, and interpretations. The [lesson plans](lessons/) provide the learning sequence; planned lessons are not completed results. See the [curriculum](<lessons/QIS - Integrated Quantum Algorithms and Probability Course.md>) for the longer plan.
 
-Lesson plans will be added to the repository as I use them. The code written in this repository is written by hand, and AI may offer corrections or assistance. AI is acting as a tutor.
+Next steps are biased quantum coins, encoding a finite probability law, and comparing exact expectations, classical Monte Carlo, and quantum amplitude estimation. A future comparison must account for state-preparation cost and the error introduced by representing an infinite-support law with finitely many qubits.
 
-## Structure
+## Sources and assistance
 
-### [Lessons](./lessons)
+The first notebook follows IBM's [Build and run your first quantum program](https://quantum.cloud.ibm.com/learning/en/courses/use-a-qc-today/build-and-run-your-first-quantum-program), with additional local sampling and noise experiments. The second is based on probability coursework taught by Prof. Ida Germana Minelli and my worked reward example. [SOURCES.md](SOURCES.md) identifies these references and the scope of adaptations.
 
-The lessons contain the plans created by ChatGPT. These are the guided steps in the form of "lessons", blocked out in 30-90 minute work sessions. The overall curriculum is available in [QIS - Integrated Quantum Algorithms and Probability Course](<./lessons/QIS - Integrated Quantum Algorithms and Probability Course.md>) document. I may adjust the course as I find gaps or deviate from the initial plan.
+I wrote the original learning code and responses while using AI as a tutor. Lesson plans were AI-generated. This publication pass also used AI-assisted editing to correct explanations, improve reproducibility, and organize documentation; it does not represent additional completed coursework.
 
-### [Projects](./projects)
-
-Each lesson will correspond with a notebook in a project. The projects are grouped by purpose, including learning, constructing the Poisson distribution circuit, and any further projects.
-
-## AI Methodology
-
-The lesson plans are created by ChatGPT, and I do not claim ownership or authorship of the lessons themselves. 
-
-I am utilizing AI as an educational assistant for this project, and the lesson markdowns document the topics covered, resources explored, and back-and-forth dialogue that evolved from the original lesson plan.
-
-This is a highly individualized plan and also an experiment in using AI as an educational assistant.
+No repository-wide open-source license is granted at present. Referenced material remains attributed to its original authors; links and attribution do not relicense their work.

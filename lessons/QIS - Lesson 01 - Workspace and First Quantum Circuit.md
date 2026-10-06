@@ -19,7 +19,7 @@ uv sync --locked
 uv run jupyter lab
 ```
 
-The completed notebook is [Unit 0, Lesson 1: Foundations](../projects/00-foundations/00-1-ibm-introduction.ipynb).
+The completed notebook is [Unit 0, Lesson 1: Foundations](../projects/00-foundations/00-01-ibm-introduction.ipynb).
 
 ## Bell-state circuit
 
